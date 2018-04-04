@@ -1,0 +1,251 @@
+<html>
+    <head>
+        <title>Mobilizing Our Air</title>
+        <meta charset='utf-8'>
+        <script type="text/javascript" src='js/jquery.js '></script>
+        <script type="text/javascript" src='js/tabletop1.3.4.js'></script>
+        <script type="text/javascript" src='js/sheetsee.js'></script>
+        <script type="text/javascript" src='js/leaflet.markercluster.js'></script>
+        <link rel="shortcut icon" href="https://raw.github.com/jlord/hack-spots/master/favico.png"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        
+        <link media="screen" rel="stylesheet" type="text/css" href="css/mobilizingourair.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+
+        <!-- <link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> #}
+         <link media="screen" rel="stylesheet" type="text/css" href="css/site.css"> -->
+        <link rel="stylesheet" href="css/MarkerCluster.css" />
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+    </head>
+<body>
+    <nav class="db dt-l w-100 border-box pa3 ph5-l">
+      <a class="db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
+        <h1>Mobilizing Our Air</h1>
+      </a>
+      <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+        <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/" title="Home">Home</a>
+        <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/about.html" title="About">About</a>
+        <!-- <a class="link dim dark-gray f6 f5-l dib" href="#" title="Contact">Contact</a> -->
+      </div>
+    </nav>
+    <article class="cf flex flex-wrap">
+        <div class="fn fl-ns w-100 w-60-ns" >
+          <div id="map"></div>
+        </div>
+
+        <div class="fn fl-ns w-100 w-40-ns" style="color:#42465f;background-color:#edeef4">
+          <div id="rightSide" class="pa3">
+                <div id="latestSpot"></div>
+                <div id="selectedSpot"></div>
+            </div>
+        </div>
+    </article>
+    <article class="cf">
+        <div class="pa3 ph5-l mv3">
+          <div id="theNumberofSpots" class="mv3"></div>
+         <input id="tableFilter" class="ba b--black-20 pa2 mb2 db w-100" type="text" placeholder="Search.."></input>
+
+            <a class="f6 link dim ph3 pv2 mb2 dib white bg-black clear" href="#0">Clear Search</a>
+            <a class="f6 link dim ph3 pv2 mb2 dib white bg-black resetMap" href="#0">Reset Map</a>
+            <span class="noMatches">no matches</span>
+
+            
+            <div class="overflow-auto">
+                <div id="hackSpotsTable" class="mt3"></div>
+            </div>
+            
+        </div>
+    </article>
+    
+
+    
+
+    <script id="hackSpotsTable" type="text/html">
+        <table class="f5 w-100 center lh-copy" cellspacing="0>
+            <thead>
+            <tr class="stripe-dark">
+              <th class="fw6 tl pa3 bg-white">Name</th>
+              <th class="fw6 tl pa3 bg-white">Address</th>
+              <th class="fw6 tl pa3 bg-white">City</th>
+              <th class="fw6 tl pa3 bg-white">Country</th>
+              <th class="fw6 tl pa3 bg-white">On The Web</th>
+            </tr>
+          </thead>
+          <tbody class="lh-copy">
+            {{#rows}}
+                <tr id="{{rowNumber}}" class="spotRow stripe-dark lh-title pa2 link">
+                    <td class="pa3">{{name}}</td>
+                    <td class="pa3">{{address}}</td>
+                    <td class="pa3">{{city}}</td>
+                    <td class="pa3">{{country}}</td>
+                    <td class="pa3"><a class="button" href="{{website}}" target="_blank">Website</a> <a class="button" href="{{facebook}}" target="_blank">Facebook</a> <a class="button" href="{{twitter}}" target="_blank">Twitter</a></td>
+                </tr>
+            {{/rows}}
+          </tbody>
+        </table>
+    </script>
+
+    <script id="latestSpot" type="text/html">
+        {{#rows}}
+            <h4 class="fauxButton">RECENTLY ADDED GROUP</h4>
+            <h2 class="f2-ns f3">{{name}}</h2>
+
+            <span class="scenario">{{address}}</span>
+           
+            <p class="lh-copy">{{description}}</p>
+
+            <span class="scenario">{{tag1}}</span> <span class="scenario">{{tag2}}</span> <span class="scenario">{{tag3}}</span>
+
+            <div class="mt2">
+                <a href="{{website}}" title="Group Website" target="_blank" class="f6 dib pr2 mid-gray dim">Website</a>
+                <a href="{{facebook}}" title="Facebook" target="_blank" class="f6 dib pr2 mid-gray dim">Facebook</a>
+                <a href="{{twitter}}"    title="Twitter" target="_blank" class="f6 dib ph2 mid-gray dim">Twitter</a>
+              </div>
+        {{/rows}}
+    </script>
+
+    <script id="theNumberofSpots" type="text/html">
+        <span class="scenario f3">{{numberOfSpots}} Community Groups Strong!</span>
+    </script>
+
+    <script id="selectedSpot" type="text/html">
+        {{#rows}}
+            <h4 class="fauxButton">SELECTED GROUP</h4>
+            <h2 class="f2-ns f3">{{name}}</h2>
+
+            <span class="scenario">{{address}}</span>
+           
+            <p class="lh-copy">{{description}}</p>
+
+            <span class="scenario">{{tag1}}</span> <span class="scenario">{{tag2}}</span> <span class="scenario">{{tag3}}</span>
+
+            <div class="mt2">
+                <a href="{{website}}" title="Group Website" target="_blank" class="f6 dib pr2 mid-gray dim">Website</a>
+                <a href="{{facebook}}" title="Facebook" target="_blank" class="f6 dib pr2 mid-gray dim">Facebook</a>
+                <a href="{{twitter}}"    title="Twitter" target="_blank" class="f6 dib ph2 mid-gray dim">Twitter</a>
+              </div>
+
+        {{/rows}}
+    </script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var gData
+            var URL = "1yT4Kv_BWTH1vuF8Tx1_qFWP-HQ_DCoiF-s_29c6GKE8"
+                Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true })
+        })
+
+        // so long, so messy
+        function showInfo(gData) {
+            tableOptions = {
+                "data": gData,
+                "tableDiv": "#hackSpotsTable",
+                "filterDiv": "#tableFilter"
+            }
+            // make the table, and the search bar
+            Sheetsee.makeTable(tableOptions)
+            Sheetsee.initiateTableFilter(tableOptions)
+
+            // create geoJSON with coordinates and other
+            // useful bits from the original data
+            var optionsJSON = ["name", "address", "country", "rowNumber", "website", "facebook", "twitter", "tag1", "tag2", "tag3", "tag4", "tag5"]
+            var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
+
+            // create map, tilelayer (map background), markers and popups
+            var map = Sheetsee.loadMap("map")
+            Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.streets-basic.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
+            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ name }}</h2>", true)
+            
+
+            // find the latest spot with the most important
+            // info filled in (to prevent map breaking if
+            // someone is currently editing spreadsheet)
+            var theLatestSpot = findLatestCompleteSpot(gData)
+            var latestSpot = Sheetsee.ich.latestSpot({
+                rows: theLatestSpot
+            })
+            // set it and pan to it
+            $('#latestSpot').html(latestSpot)
+            map.setView([theLatestSpot.lat, theLatestSpot.long], 15)
+
+            // when someone clicks on a row, highlight it and
+            // re-center the map
+            // TODO show popup, change marker color
+            $('.spotRow').live("click", function(event) {
+                $('.spotRow').removeClass("selectedRow")
+                var rowNumber = $(this).closest("tr").attr("id")
+                $('#' + rowNumber).addClass("selectedRow")
+                var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
+                var selectedSpot = Sheetsee.ich.selectedSpot({
+                    rows: dataElement
+                })
+                $('#latestSpot').css("display", "none")
+                $('#selectedSpot').html(selectedSpot).css("display", "inline")
+                var selectedCoords = [dataElement[0].lat, dataElement[0].long]
+                map.setView(selectedCoords, 15)
+            })
+
+            // so that the first map and info that loads
+            // is complete and doesn't show rows that are
+            // actively being edited by folk
+            function findLatestCompleteSpot(data) {
+                var latestCompleteSpot = []
+                var startWithLatestRow = data.reverse()
+                startWithLatestRow.forEach(function(row){
+                    if (!row.lat || !row.long || !row.name || !row.address || !row.city ) return
+                    else latestCompleteSpot.push(row)
+                })
+                return latestCompleteSpot[0]
+            }
+
+            // Add click listener to the markerLayer
+            markerLayer.on('click', function(e) {
+                // clear any selected rows
+                $('.spotRow').removeClass("selectedRow")
+                // get row number of selected marker
+                var rowNumber = e.layer.feature.opts.rowNumber
+                // find that row in the table and make consider it selected
+                $('#' + rowNumber).addClass("selectedRow")
+                // using row number, get the data for the selected spot
+                var dataElement = Sheetsee.getMatches(gData, rowNumber.toString(), "rowNumber")
+                // take those details and re-write the selected spot section
+                var selectedSpot = Sheetsee.ich.selectedSpot({
+                    rows: dataElement
+                })
+                // center the map on the selected element
+                map.panTo([dataElement[0].lat, dataElement[0].long])
+                // update the spot listing
+                $('#latestSpot').css("display", "none")
+                $('#selectedSpot').html(selectedSpot).css("display", "inline")
+            })
+
+            // reset the map, zoom out, and recenter on 0,0
+            $('.resetMap').click(function() {
+                $('.spotRow').removeClass("selectedRow")
+                $('#latestSpot').css("display", "inline")
+                $('#selectedSpot').css("display", "none")
+                map.setView([0,0], 1)
+            })
+
+            // find total number of spots added
+            var theNumberofSpots = Sheetsee.ich.theNumberofSpots({
+                numberOfSpots: gData.length
+            })
+            $('#theNumberofSpots').html(theNumberofSpots)
+
+            if(window.location.hash) {
+                $('#tableFilter').val(window.location.hash.substring(1)).keyup()
+                $('.spotRow').first().click()
+            }
+        }
+
+        $(document).on('keyup', '#tableFilter', function() {
+            window.location.hash = $(this).val()
+            $('.spotRow').first().click()
+        })
+    </script>
+
+</body>
+</html>
