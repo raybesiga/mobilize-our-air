@@ -156,7 +156,7 @@
         var map = Sheetsee.loadMap("map")
 
         Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.dark.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
-        var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
+        Sheetsee.addMarkerLayer(geoJSON, map, template)
 
         tableOptions = {
                 "data": data,
