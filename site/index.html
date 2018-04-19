@@ -6,7 +6,6 @@
         <script type="text/javascript" src='js/tabletop1.3.4.js'></script>
         <script type="text/javascript" src='js/sheetsee.js'></script>
         <script type="text/javascript" src='js/leaflet.markercluster.js'></script>
-        <link rel="shortcut icon" href="https://raw.github.com/jlord/hack-spots/master/favico.png"/>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -20,6 +19,11 @@
         <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
     </head>
 <body>
+    <style>
+    .leaflet-popup-content li {list-style:none;}
+    .leaflet-popup-content {width: 102px;}
+    .leaflet-popup-content img {width: 100px;}
+    </style>
     <nav class="db dt-l w-100 border-box pa3 ph5-l">
       <a class="db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
         <h1>Mobilizing Our Air</h1>
@@ -27,16 +31,16 @@
       <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
         <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/" title="Home">Home</a>
         <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/about.html" title="About">About</a>
-        <!-- <a class="link dim dark-gray f6 f5-l dib" href="#" title="Contact">Contact</a> -->
+        <a class="link dim dark-gray f6 f5-l dib" href="https://docs.google.com/spreadsheets/d/1yT4Kv_BWTH1vuF8Tx1_qFWP-HQ_DCoiF-s_29c6GKE8/edit?usp=sharing" target="_blank" title="Add a Group">Add Group</a>
       </div>
     </nav>
-    <article class="cf flex flex-wrap">
-        <div class="fn fl-ns w-100 w-60-ns" >
+    <article class="cf">
+        <div class="fn fl-ns w-100" >
           <div id="map"></div>
         </div>
 
-        <div class="fn fl-ns w-100 w-40-ns" style="color:#42465f;background-color:#edeef4">
-          <div id="rightSide" class="pa3">
+        <div class="fn fl-ns w-100" style="color:#42465f;background-color:#edeef4">
+          <div id="rightSide" class="pa3 ph5-l">
                 <div id="latestSpot"></div>
                 <div id="selectedSpot"></div>
             </div>
@@ -68,8 +72,7 @@
             <tr class="stripe-dark">
               <th class="fw6 tl pa3 bg-white">Name</th>
               <th class="fw6 tl pa3 bg-white">Address</th>
-              <th class="fw6 tl pa3 bg-white">City</th>
-              <th class="fw6 tl pa3 bg-white">Country</th>
+              <th class="fw4 tl pa3 bg-white">Tags</th>
               <th class="fw6 tl pa3 bg-white">On The Web</th>
             </tr>
           </thead>
@@ -78,8 +81,7 @@
                 <tr id="{{rowNumber}}" class="spotRow stripe-dark lh-title pa2 link">
                     <td class="pa3">{{name}}</td>
                     <td class="pa3">{{address}}</td>
-                    <td class="pa3">{{city}}</td>
-                    <td class="pa3">{{country}}</td>
+                    <td class="pa3"><span class="mr1 scenario">{{tag1}}</span><span class="mr1 scenario">{{tag2}}</span><span class="mr1 scenario">{{tag3}}</span> <span class="mr1 scenario">{{tag5}}</span> <span class="mr1 scenario">{{tag5}}</span></td>
                     <td class="pa3"><a class="button" href="{{website}}" target="_blank">Website</a> <a class="button" href="{{facebook}}" target="_blank">Facebook</a> <a class="button" href="{{twitter}}" target="_blank">Twitter</a></td>
                 </tr>
             {{/rows}}
@@ -92,17 +94,20 @@
             <h4 class="fauxButton">RECENTLY ADDED GROUP</h4>
             <h2 class="f2-ns f3">{{name}}</h2>
 
-            <span class="scenario">{{address}}</span>
+            <div class="mb2">
+            <mark>{{tag1}}</mark> <mark>{{tag2}}</mark> <mark>{{tag3}}</mark> <mark>{{tag4}}</mark> <mark>{{tag5}}</mark>
+            </div>
+
            
             <p class="lh-copy">{{description}}</p>
 
-            <span class="scenario">{{tag1}}</span> <span class="scenario">{{tag2}}</span> <span class="scenario">{{tag3}}</span>
-
-            <div class="mt2">
+            <div class="mv3">
                 <a href="{{website}}" title="Group Website" target="_blank" class="f6 dib pr2 mid-gray dim">Website</a>
                 <a href="{{facebook}}" title="Facebook" target="_blank" class="f6 dib pr2 mid-gray dim">Facebook</a>
                 <a href="{{twitter}}"    title="Twitter" target="_blank" class="f6 dib ph2 mid-gray dim">Twitter</a>
               </div>
+
+            <mark class="mv2">{{address}}</mark>
         {{/rows}}
     </script>
 
@@ -115,17 +120,19 @@
             <h4 class="fauxButton">SELECTED GROUP</h4>
             <h2 class="f2-ns f3">{{name}}</h2>
 
-            <span class="scenario">{{address}}</span>
+            <div class="mb2">
+             <mark>{{tag1}}</mark> <mark>{{tag2}}</mark> <mark>{{tag3}}</mark> <mark>{{tag4}}</mark> <mark>{{tag5}}</mark>
+            </div>
            
             <p class="lh-copy">{{description}}</p>
 
-            <span class="scenario">{{tag1}}</span> <span class="scenario">{{tag2}}</span> <span class="scenario">{{tag3}}</span>
-
-            <div class="mt2">
+            <div class="mv3">
                 <a href="{{website}}" title="Group Website" target="_blank" class="f6 dib pr2 mid-gray dim">Website</a>
                 <a href="{{facebook}}" title="Facebook" target="_blank" class="f6 dib pr2 mid-gray dim">Facebook</a>
                 <a href="{{twitter}}"    title="Twitter" target="_blank" class="f6 dib ph2 mid-gray dim">Twitter</a>
               </div>
+
+            <mark class="mv2">{{address}}</mark>
 
         {{/rows}}
     </script>
@@ -139,6 +146,23 @@
 
         // so long, so messy
         function showInfo(gData) {
+            var optionsJSON = ["name", "address", "description", "website", "facebook", "twitter", "tag1", "tag2", "tag3", "tag4", "tag5"]
+            
+            // an html template for your popup
+            var template = "<div ><h2 >{{name}}</h2>"
+                         + "<p>{{address}}</p>"
+                         + "<div><span class='mr2'><a href='{{website}}' title='Website' target='_blank'>Website</a>&nbsp</span>"
+                         + "<span class='mr2'><a href='{{facebook}}' title='Facebook' target='_blank' >Facebook</a>&nbsp</span>"
+                         + "<span class='mr2'><a href='{{twitter}}' title='Twitter' target='_blank'>Twitter</a>&nbsp</span>"
+                         + '</div>'
+                         + "<div><span class='scenario'>{{tag1}}</span> <span class='scenario'>{{tag2}}</span> <span class='scenario'>{{tag3}}</span> <span class='scenario'>{{tag4}}</span> <span class='scenario'>{{tag5}}</span></div>"
+                         + "</div>"
+            var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
+            var map = Sheetsee.loadMap("map")
+
+            Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.dark.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
+            Sheetsee.addMarkerLayer(geoJSON, map, template)
+
             tableOptions = {
                 "data": gData,
                 "tableDiv": "#hackSpotsTable",
@@ -150,13 +174,17 @@
 
             // create geoJSON with coordinates and other
             // useful bits from the original data
-            var optionsJSON = ["name", "address", "country", "rowNumber", "website", "facebook", "twitter", "tag1", "tag2", "tag3", "tag4", "tag5"]
-            var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
+            // var optionsJSON = ["name", "address", "website", "facebook", "twitter", "tag1", "tag2", "tag3", "tag4", "tag5"]
+
+            // html template for the popup 
+            // var template = "<div class='pa2 ba b --black-20'>" + "<h3 class='f3 f2-l'>{{name}}</h3>" + "</div>"
+            // var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
 
             // create map, tilelayer (map background), markers and popups
-            var map = Sheetsee.loadMap("map")
-            Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.streets-basic.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
-            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ name }}</h2>", true)
+            // var map = Sheetsee.loadMap("map")
+            // Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.dark.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
+            // var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
+            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
             
 
             // find the latest spot with the most important
@@ -168,7 +196,7 @@
             })
             // set it and pan to it
             $('#latestSpot').html(latestSpot)
-            map.setView([theLatestSpot.lat, theLatestSpot.long], 15)
+            map.setView([theLatestSpot.lat, theLatestSpot.long], 13)
 
             // when someone clicks on a row, highlight it and
             // re-center the map
@@ -184,7 +212,7 @@
                 $('#latestSpot').css("display", "none")
                 $('#selectedSpot').html(selectedSpot).css("display", "inline")
                 var selectedCoords = [dataElement[0].lat, dataElement[0].long]
-                map.setView(selectedCoords, 15)
+                map.setView(selectedCoords, 13)
             })
 
             // so that the first map and info that loads
