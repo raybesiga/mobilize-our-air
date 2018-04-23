@@ -9170,8 +9170,7 @@ legend,td,th {
 
 /* custom */
 #map {
-    height: 700px; 
-    min-width: 300px
+    height: 700px;
 }
 #map a {
     border: none
@@ -9201,4 +9200,10 @@ legend,td,th {
 }
 .selectedRow {
     color: #FF4C0D
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 320px) and (max-width: 1024px) {
+  body {border: 20px #F8F8F8 solid; margin: 0px; padding: 20px 20px 80px 20px;}
+  #tableFilter, .clear, .resetMap {display: none;}
+  #wrapper {max-width: 460px; padding-top: 20px;}
+  #hackSpotsTable, #map {min-width: 224px;}
 }

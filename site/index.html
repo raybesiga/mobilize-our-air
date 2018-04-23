@@ -1,29 +1,27 @@
+<!doctype html>
 <html>
-    <head>
-        <title>Mobilizing Our Air</title>
-        <meta charset='utf-8'>
-        <script type="text/javascript" src='js/jquery.js '></script>
-        <script type="text/javascript" src='js/tabletop1.3.4.js'></script>
-        <script type="text/javascript" src='js/sheetsee.js'></script>
-        <script type="text/javascript" src='js/leaflet.markercluster.js'></script>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-        
-        <link media="screen" rel="stylesheet" type="text/css" href="css/mobilizingourair.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-
-        <!-- <link media="screen" rel="stylesheet" type="text/css" href="css/style.css"> #}
-         <link media="screen" rel="stylesheet" type="text/css" href="css/site.css"> -->
-        <link rel="stylesheet" href="css/MarkerCluster.css" />
-        <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
-    </head>
-<body>
-    <style>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/tabletop1.3.4.js"></script>
+    <script type="text/javascript" src="js/sheetsee.js"></script>
+    <link   type='text/css' rel='stylesheet' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'>
+    <!-- Add a Title -->
+    <title>Mobilizing Our Air</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link media="screen" rel="stylesheet" type="text/css" href="css/mobilizingourair.css">
+  </head>
+  <style>
+    html {width: 100%; height: 100%;}
+    body {width: 100%; height: 100%; margin: 0;}
+    /* How about a different background color? */
+    #map {width: 100%; height: 700px; background-color: #F7CE86;}
     .leaflet-popup-content li {list-style:none;}
-    .leaflet-popup-content {width: 102px;}
+    .leaflet-popup-content {width: 200px;}
     .leaflet-popup-content img {width: 100px;}
-    </style>
+    a {border: none;}
+  </style>
+  <body>
     <nav class="db dt-l w-100 border-box pa3 ph5-l">
       <a class="db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
         <h1>Mobilizing Our Air</h1>
@@ -31,7 +29,7 @@
       <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
         <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/" title="Home">Home</a>
         <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/about.html" title="About">About</a>
-        <a class="link dim dark-gray f6 f5-l dib" href="https://docs.google.com/spreadsheets/d/1yT4Kv_BWTH1vuF8Tx1_qFWP-HQ_DCoiF-s_29c6GKE8/edit?usp=sharing" target="_blank" title="Add a Group">Add Group</a>
+        <a class="link dim dark-gray f6 f5-l dib" href="https://docs.google.com/forms/d/e/1FAIpQLSesfClSl39wOJdPni8FFvzR5zjGsVX6IQMdMW1wQmzASbqE_A/viewform?fbzx=-1611877441786984700" target="_blank" title="Add a Group">Add Group</a>
       </div>
     </nav>
     <article class="cf">
@@ -39,13 +37,9 @@
           <div id="map"></div>
         </div>
 
-        <div class="fn fl-ns w-100" style="color:#42465f;background-color:#edeef4">
-          <div id="rightSide" class="pa3 ph5-l">
-                <div id="latestSpot"></div>
-                <div id="selectedSpot"></div>
-            </div>
-        </div>
+        
     </article>
+
     <article class="cf">
         <div class="pa3 ph5-l mv3">
           <div id="theNumberofSpots" class="mv3"></div>
@@ -62,11 +56,8 @@
             
         </div>
     </article>
-    
 
-    
-
-    <script id="hackSpotsTable" type="text/html">
+     <script id="hackSpotsTable" type="text/html">
         <table class="f5 w-100 center lh-copy" cellspacing="0>
             <thead>
             <tr class="stripe-dark">
@@ -81,7 +72,7 @@
                 <tr id="{{rowNumber}}" class="spotRow stripe-dark lh-title pa2 link">
                     <td class="pa3">{{name}}</td>
                     <td class="pa3">{{address}}</td>
-                    <td class="pa3"><span class="mr1 scenario">{{tag1}}</span><span class="mr1 scenario">{{tag2}}</span><span class="mr1 scenario">{{tag3}}</span> <span class="mr1 scenario">{{tag5}}</span> <span class="mr1 scenario">{{tag5}}</span></td>
+                    <td class="pa3"><span class="mr1 scenario">{{tag1}}</span><span class="mr1 scenario">{{tag2}}</span><span class="mr1 scenario">{{tag3}}</span> <span class="mr1 scenario">{{tag4}}</span> <span class="mr1 scenario">{{tag5}}</span></td>
                     <td class="pa3"><a class="button" href="{{website}}" target="_blank">Website</a> <a class="button" href="{{facebook}}" target="_blank">Facebook</a> <a class="button" href="{{twitter}}" target="_blank">Twitter</a></td>
                 </tr>
             {{/rows}}
@@ -89,7 +80,7 @@
         </table>
     </script>
 
-    <script id="latestSpot" type="text/html">
+     <script id="latestSpot" type="text/html">
         {{#rows}}
             <h4 class="fauxButton">RECENTLY ADDED GROUP</h4>
             <h2 class="f2-ns f3">{{name}}</h2>
@@ -138,142 +129,126 @@
     </script>
 
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            var gData
+      document.addEventListener('DOMContentLoaded', function() {
+            var data
             var URL = "1yT4Kv_BWTH1vuF8Tx1_qFWP-HQ_DCoiF-s_29c6GKE8"
                 Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true })
         })
 
-        // so long, so messy
-        function showInfo(gData) {
-            var optionsJSON = ["name", "address", "description", "website", "facebook", "twitter", "tag1", "tag2", "tag3", "tag4", "tag5"]
-            
-            // an html template for your popup
-            var template = "<div ><h2 >{{name}}</h2>"
-                         + "<p>{{address}}</p>"
-                         + "<div><span class='mr2'><a href='{{website}}' title='Website' target='_blank'>Website</a>&nbsp</span>"
-                         + "<span class='mr2'><a href='{{facebook}}' title='Facebook' target='_blank' >Facebook</a>&nbsp</span>"
-                         + "<span class='mr2'><a href='{{twitter}}' title='Twitter' target='_blank'>Twitter</a>&nbsp</span>"
-                         + '</div>'
-                         + "<div><span class='scenario'>{{tag1}}</span> <span class='scenario'>{{tag2}}</span> <span class='scenario'>{{tag3}}</span> <span class='scenario'>{{tag4}}</span> <span class='scenario'>{{tag5}}</span></div>"
-                         + "</div>"
-            var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
-            var map = Sheetsee.loadMap("map")
+      function showInfo(data) {
+        // the column headers of the info you want in your popup
+        var optionsJSON = ["name", "address", "description", "website", "facebook", "twitter", "tag1", "tag2", "tag3", "tag4", "tag5"]
+        // an html template for your popup
+        var template = "<div ><h2 >{{name}}</h2>"
+                     + "<p>{{address}}</p>"
+                     + "<div><span class='mr2'><a href='{{website}}' title='Website' target='_blank'>Website</a>&nbsp</span>"
+                     + "<span class='mr2'><a href='{{facebook}}' title='Facebook' target='_blank' >Facebook</a>&nbsp</span>"
+                     + "<span class='mr2'><a href='{{twitter}}' title='Twitter' target='_blank'>Twitter</a>&nbsp</span>"
+                     + '</div>'
+                     + "<div><span class='scenario'>{{tag1}}</span> <span class='scenario'>{{tag2}}</span> <span class='scenario'>{{tag3}}</span> <span class='scenario'>{{tag4}}</span> <span class='scenario'>{{tag5}}</span></div>"
+                     + "</div>"
+        var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
+        var map = Sheetsee.loadMap("map")
 
-            Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.dark.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
-            Sheetsee.addMarkerLayer(geoJSON, map, template)
+        Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.dark.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
+        Sheetsee.addMarkerLayer(geoJSON, map, template)
 
-            tableOptions = {
-                "data": gData,
+        tableOptions = {
+                "data": data,
                 "tableDiv": "#hackSpotsTable",
                 "filterDiv": "#tableFilter"
             }
-            // make the table, and the search bar
-            Sheetsee.makeTable(tableOptions)
-            Sheetsee.initiateTableFilter(tableOptions)
+        // make the table, and the search bar
+        Sheetsee.makeTable(tableOptions)
+        Sheetsee.initiateTableFilter(tableOptions)
 
-            // create geoJSON with coordinates and other
-            // useful bits from the original data
-            // var optionsJSON = ["name", "address", "website", "facebook", "twitter", "tag1", "tag2", "tag3", "tag4", "tag5"]
+        // find the latest spot with the most important
+        // info filled in (to prevent map breaking if
+        // someone is currently editing spreadsheet)
+        var theLatestSpot = findLatestCompleteSpot(data)
+        var latestSpot = Sheetsee.ich.latestSpot({
+            rows: theLatestSpot
+        })
+        // set it and pan to it
+        $('#latestSpot').html(latestSpot)
+        map.setView([theLatestSpot.lat, theLatestSpot.long], 13)
 
-            // html template for the popup 
-            // var template = "<div class='pa2 ba b --black-20'>" + "<h3 class='f3 f2-l'>{{name}}</h3>" + "</div>"
-            // var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
-
-            // create map, tilelayer (map background), markers and popups
-            // var map = Sheetsee.loadMap("map")
-            // Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.dark.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
-            // var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
-            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
-            
-
-            // find the latest spot with the most important
-            // info filled in (to prevent map breaking if
-            // someone is currently editing spreadsheet)
-            var theLatestSpot = findLatestCompleteSpot(gData)
-            var latestSpot = Sheetsee.ich.latestSpot({
-                rows: theLatestSpot
+        // when someone clicks on a row, highlight it and
+        // re-center the map
+        // TODO show popup, change marker color
+        $('.spotRow').live("click", function(event) {
+            $('.spotRow').removeClass("selectedRow")
+            var rowNumber = $(this).closest("tr").attr("id")
+            $('#' + rowNumber).addClass("selectedRow")
+            var dataElement = Sheetsee.getMatches(data, rowNumber, "rowNumber")
+            var selectedSpot = Sheetsee.ich.selectedSpot({
+                rows: dataElement
             })
-            // set it and pan to it
-            $('#latestSpot').html(latestSpot)
-            map.setView([theLatestSpot.lat, theLatestSpot.long], 13)
+            $('#latestSpot').css("display", "none")
+            $('#selectedSpot').html(selectedSpot).css("display", "inline")
+            var selectedCoords = [dataElement[0].lat, dataElement[0].long]
+            map.setView(selectedCoords, 13)
+        })
 
-            // when someone clicks on a row, highlight it and
-            // re-center the map
-            // TODO show popup, change marker color
-            $('.spotRow').live("click", function(event) {
-                $('.spotRow').removeClass("selectedRow")
-                var rowNumber = $(this).closest("tr").attr("id")
-                $('#' + rowNumber).addClass("selectedRow")
-                var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
-                var selectedSpot = Sheetsee.ich.selectedSpot({
-                    rows: dataElement
-                })
-                $('#latestSpot').css("display", "none")
-                $('#selectedSpot').html(selectedSpot).css("display", "inline")
-                var selectedCoords = [dataElement[0].lat, dataElement[0].long]
-                map.setView(selectedCoords, 13)
+        // so that the first map and info that loads
+        // is complete and doesn't show rows that are
+        // actively being edited by folk
+        function findLatestCompleteSpot(data) {
+            var latestCompleteSpot = []
+            var startWithLatestRow = data.reverse()
+            startWithLatestRow.forEach(function(row){
+                if (!row.lat || !row.long || !row.name || !row.address || !row.city ) return
+                else latestCompleteSpot.push(row)
             })
-
-            // so that the first map and info that loads
-            // is complete and doesn't show rows that are
-            // actively being edited by folk
-            function findLatestCompleteSpot(data) {
-                var latestCompleteSpot = []
-                var startWithLatestRow = data.reverse()
-                startWithLatestRow.forEach(function(row){
-                    if (!row.lat || !row.long || !row.name || !row.address || !row.city ) return
-                    else latestCompleteSpot.push(row)
-                })
-                return latestCompleteSpot[0]
-            }
-
-            // Add click listener to the markerLayer
-            markerLayer.on('click', function(e) {
-                // clear any selected rows
-                $('.spotRow').removeClass("selectedRow")
-                // get row number of selected marker
-                var rowNumber = e.layer.feature.opts.rowNumber
-                // find that row in the table and make consider it selected
-                $('#' + rowNumber).addClass("selectedRow")
-                // using row number, get the data for the selected spot
-                var dataElement = Sheetsee.getMatches(gData, rowNumber.toString(), "rowNumber")
-                // take those details and re-write the selected spot section
-                var selectedSpot = Sheetsee.ich.selectedSpot({
-                    rows: dataElement
-                })
-                // center the map on the selected element
-                map.panTo([dataElement[0].lat, dataElement[0].long])
-                // update the spot listing
-                $('#latestSpot').css("display", "none")
-                $('#selectedSpot').html(selectedSpot).css("display", "inline")
-            })
-
-            // reset the map, zoom out, and recenter on 0,0
-            $('.resetMap').click(function() {
-                $('.spotRow').removeClass("selectedRow")
-                $('#latestSpot').css("display", "inline")
-                $('#selectedSpot').css("display", "none")
-                map.setView([0,0], 1)
-            })
-
-            // find total number of spots added
-            var theNumberofSpots = Sheetsee.ich.theNumberofSpots({
-                numberOfSpots: gData.length
-            })
-            $('#theNumberofSpots').html(theNumberofSpots)
-
-            if(window.location.hash) {
-                $('#tableFilter').val(window.location.hash.substring(1)).keyup()
-                $('.spotRow').first().click()
-            }
+            return latestCompleteSpot[0]
         }
 
-        $(document).on('keyup', '#tableFilter', function() {
+        // Add click listener to the markerLayer
+        markerLayer.on('click', function(e) {
+            // clear any selected rows
+            $('.spotRow').removeClass("selectedRow")
+            // get row number of selected marker
+            var rowNumber = e.layer.feature.opts.rowNumber
+            // find that row in the table and make consider it selected
+            $('#' + rowNumber).addClass("selectedRow")
+            // using row number, get the data for the selected spot
+            var dataElement = Sheetsee.getMatches(data, rowNumber.toString(), "rowNumber")
+            // take those details and re-write the selected spot section
+            var selectedSpot = Sheetsee.ich.selectedSpot({
+                rows: dataElement
+            })
+            // center the map on the selected element
+            map.panTo([dataElement[0].lat, dataElement[0].long])
+            // update the spot listing
+            $('#latestSpot').css("display", "none")
+            $('#selectedSpot').html(selectedSpot).css("display", "inline")
+        })
+
+        // reset the map, zoom out, and recenter on 0,0
+        $('.resetMap').click(function() {
+            $('.spotRow').removeClass("selectedRow")
+            $('#latestSpot').css("display", "inline")
+            $('#selectedSpot').css("display", "none")
+            map.setView([0,0], 1)
+        })
+
+        // find total number of spots added
+        var theNumberofSpots = Sheetsee.ich.theNumberofSpots({
+            numberOfSpots: data.length
+        })
+        $('#theNumberofSpots').html(theNumberofSpots)
+
+        if(window.location.hash) {
+            $('#tableFilter').val(window.location.hash.substring(1)).keyup()
+            $('.spotRow').first().click()
+        }
+
+      }
+
+      $(document).on('keyup', '#tableFilter', function() {
             window.location.hash = $(this).val()
             $('.spotRow').first().click()
         })
     </script>
-
-</body>
+  </body>
 </html>
