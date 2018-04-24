@@ -36,6 +36,11 @@
         <div class="fn fl-ns w-100" >
           <div id="map"></div>
         </div>
+        <div class="fn fl-ns w-100" style="color:#42465f;background-color:#edeef4">
+          <div id="rightSide" class="pa3 ph5-l">
+                <div id="selectedSpot"></div>
+            </div>
+        </div>
 
         
     </article>
@@ -153,6 +158,8 @@
         Sheetsee.addTileLayer(map, 'https://api.tiles.mapbox.com/v4/mapbox.dark.json?access_token=pk.eyJ1IjoicmF5YmVzaWdhIiwiYSI6IlZxbVMtR2MifQ.mMZ6_JoSJOVvoAPBdEtVMw')
         Sheetsee.addMarkerLayer(geoJSON, map, template)
 
+        var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, template)
+
         tableOptions = {
                 "data": data,
                 "tableDiv": "#hackSpotsTable",
@@ -172,11 +179,12 @@
         // set it and pan to it
         $('#latestSpot').html(latestSpot)
         map.setView([theLatestSpot.lat, theLatestSpot.long], 13)
-
+            
         // when someone clicks on a row, highlight it and
         // re-center the map
         // TODO show popup, change marker color
-        $('.spotRow').live("click", function(event) {
+        // $('.spotRow').live("click", function(event) {
+        $('body').on('click', '.spotRow', function(event) {
             $('.spotRow').removeClass("selectedRow")
             var rowNumber = $(this).closest("tr").attr("id")
             $('#' + rowNumber).addClass("selectedRow")
@@ -204,7 +212,8 @@
         }
 
         // Add click listener to the markerLayer
-        markerLayer.on('click', function(e) {
+        $('body').on('click', 'markerLayer', function(e) {
+        // markerLayer.on('click', function(e) {
             // clear any selected rows
             $('.spotRow').removeClass("selectedRow")
             // get row number of selected marker
