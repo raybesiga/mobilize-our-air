@@ -78,7 +78,13 @@
                 <tr id="{{rowNumber}}" class="spotRow stripe-dark lh-title pa2 link">
                     <td class="pa3">{{name}}</td>
                     <td class="pa3">{{address}}</td>
-                    <td class="pa3"><span class="mr1 scenario">{{tag1}}</span><span class="mr1 scenario">{{tag2}}</span><span class="mr1 scenario">{{tag3}}</span> <span class="mr1 scenario">{{tag4}}</span> <span class="mr1 scenario">{{tag5}}</span></td>
+                    <td class="pa3">
+                        <span class="mr1 mb2 tag">{{tag1}}</span>
+                        <span class="mr1 mb2 tag">{{tag2}}</span>
+                        <span class="mr1 mb2 tag">{{tag3}}</span>
+                        <span class="mr1 mb2 tag">{{tag4}}</span> 
+                        <span class="mr1 mb2 tag">{{tag5}}</span>
+                    </td>
                     <td class="pa3"><a class="button" href="{{website}}" target="_blank">Website</a> <a class="button" href="{{facebook}}" target="_blank">Facebook</a> <a class="button" href="{{twitter}}" target="_blank">Twitter</a></td>
                 </tr>
             {{/rows}}
@@ -118,7 +124,11 @@
             <h2 class="f2-ns f3">{{name}}</h2>
 
             <div class="mb2">
-             <mark>{{tag1}}</mark> <mark>{{tag2}}</mark> <mark>{{tag3}}</mark> <mark>{{tag4}}</mark> <mark>{{tag5}}</mark>
+                <button class="f6 button-reset bg-white ba b--black-20 dim pointer pv1 black-60">{{tag1}}</button>
+                <button class="f6 button-reset bg-white ba b--black-20 dim pointer pv1 black-60">{{tag2}}</button>
+                <button class="f6 button-reset bg-white ba b--black-20 dim pointer pv1 black-60">{{tag3}}</button>
+                <button class="f6 button-reset bg-white ba b--black-20 dim pointer pv1 black-60">{{tag4}}</button>
+                <button class="f6 button-reset bg-white ba b--black-20 dim pointer pv1 black-60">{{tag5}}</button>
             </div>
            
             <p class="lh-copy">{{description}}</p>
@@ -151,7 +161,7 @@
                      + "<span class='mr2'><a href='{{facebook}}' title='Facebook' target='_blank' >Facebook</a>&nbsp</span>"
                      + "<span class='mr2'><a href='{{twitter}}' title='Twitter' target='_blank'>Twitter</a>&nbsp</span>"
                      + '</div>'
-                     + "<div><span class='scenario'>{{tag1}}</span> <span class='scenario'>{{tag2}}</span> <span class='scenario'>{{tag3}}</span> <span class='scenario'>{{tag4}}</span> <span class='scenario'>{{tag5}}</span></div>"
+                     + "<div class='mv2'> <span class='mr1 mb2 tag'>{{tag1}}</span><span class='mh1 mv2 tag'>{{tag2}}</span> <span class='mh1 mv2 tag'>{{tag3}}</span> <span class='mh1 mv2 tag'>{{tag4}}</span> <span class='mh1 mv2 tag'>{{tag5}}</span></div>"
                      + "</div>"
         var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
         var map = Sheetsee.loadMap("map")

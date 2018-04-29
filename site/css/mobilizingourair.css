@@ -9175,8 +9175,21 @@ legend,td,th {
 #map a {
     border: none
 }
+.mob{
+    box-shadow: inset 0 -16px 0 0px #d6332c
+}
 .scenario {
     box-shadow: inset 0 -16px 0 0px #F5ED09
+}
+.tag {
+    color : #fff !important;
+    box-shadow: inset 0 -20px 0 0px #000
+}
+.tagged {
+    background: #000 !important;
+    color : #fff !important;
+    padding: 20px;
+    border-radius: 2px;
 }
 .leaflet-popup-content h2 {
     font-family: "Circular"; 
