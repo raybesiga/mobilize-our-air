@@ -3,7 +3,7 @@
 ![screenshot](/img/mobilizing-our-air-firebaseapp.png)
 
 
-## From Save Our Air to Mobilizing Our Air<
+## From Save Our Air to Mobilizing Our Air
           
 Save Our Air is an experiment funded by OrganiCity and developed by the Public Data Lab. The partnership is characterized by a multidisciplinary composition to provide the knowledge needed in the creation of data-stories. Three projects evolved out of the Save Our Air experiment, Mobilizing Our Air being one of them.
 
@@ -20,7 +20,7 @@ Mobilizing Our Air was developed and coordinated by the following members:
 * Daniel Bach, Aalborg University Copenhagen
 * Pelle Annfeldt Israelsson, Aalborg University Copenhagen
 
-For more detailed information on Mobilizing Our Air and the other two Save Our Air projects, please visit the <a href="http://saveourair.publicdatalab.org/" target="_blank">Save Our Air website</a></p>
+For more detailed information on Mobilizing Our Air and the other two Save Our Air projects, please visit the <a href="http://saveourair.publicdatalab.org/" target="_blank">Save Our Air</a>website</p>
 
 Designed by Angeles and Verena. Developed by [Ray Besiga](https://raybesiga.com)
 
