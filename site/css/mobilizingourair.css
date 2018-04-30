@@ -9169,6 +9169,9 @@ legend,td,th {
 }
 
 /* custom */
+.moa-red{
+  color: #fc3a3a
+}
 #map {
     height: 700px;
 }
@@ -9209,7 +9212,7 @@ legend,td,th {
     margin-bottom: 4px
 }
 .spotRow:hover {
-    color: #0f1fea
+    color: #fc3a3a;
 }
 .selectedRow {
     color: #FF4C0D
