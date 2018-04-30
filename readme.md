@@ -2,16 +2,26 @@
 
 ![screenshot](/img/mobilizing-our-air-firebaseapp.png)
 
-## About This Project
 
-SaveOurAir is an experiment funded by Organicity. The partnership is characterised by a multidisciplinary composition, in order to provide all the knowledge needed in the creation of data-stories. This particular project is coordinated by the following members:</p>
-
-* Ángeles Briones, DensityDesign Lab - <i>Politecnico di Milano</i>
-* Verena Rauchenwald, <i>Gehl</i>
-* Anders Koed Madsen, TantLab - <i>Aalborg University Copenhagen</i>
+## From Save Our Air to Mobilizing Our Air<
           
-### How to Contribute
+Save Our Air is an experiment funded by OrganiCity and developed by the Public Data Lab. The partnership is characterized by a multidisciplinary composition to provide the knowledge needed in the creation of data-stories. Three projects evolved out of the Save Our Air experiment, Mobilizing Our Air being one of them.
 
-This website is connected to <a href="https://docs.google.com/spreadsheets/d/1yT4Kv_BWTH1vuF8Tx1_qFWP-HQ_DCoiF-s_29c6GKE8/edit?usp=sharing" target="_blank">this Google Spreadsheet</a>, which I've shared, so click and add a new community group to the bottom of the list! For the map you'll need to <strong>get the lat and long</strong> of their location, you can get that <a href="http://www.latlong.net/" target="_blank">here</a>. The locating of these places is helpful, so please try to fill out all the columns.
+### Mobilizing Our Air’s Vision
+
+The platform strives to: 1. support local activist groups to connect with each other through visibility on the platform, 2. inform individuals interested in activism about activist groups in their vicinity and invites them to join the movements, 3. Bring the topic of air pollution to other activist groups’ attention which already support the cause of better air quality (i.e. bicycle groups), however without openly promoting it.
+
+### The People behind Mobilizing Our Air
+  
+Mobilizing Our Air was developed and coordinated by the following members:
+
+* Ángeles Briones, DensityDesign Lab - Politecnico di Milano
+* Verena Rauchenwald, Gehl
+* Daniel Bach, Aalborg University Copenhagen
+* Pelle Annfeldt Israelsson, Aalborg University Copenhagen
+
+For more detailed information on Mobilizing Our Air and the other two Save Our Air projects, please visit the <a href="http://saveourair.publicdatalab.org/" target="_blank">Save Our Air website</a></p>
+
+Designed by Angeles and Verena. Developed by [Ray Besiga](https://raybesiga.com)
 
 
